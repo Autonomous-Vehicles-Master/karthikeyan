@@ -1,0 +1,20 @@
+<launch>
+
+  <arg name="lat_origin" default="48.78462542" />
+  <arg name="lon_origin" default="11.47318943" />
+  <arg name="map_file_name" default="$(find virtual_tracks)/include/virtual_tracks/lanelet_in_bavarian_map_1.osm" />
+  <include file="$(find lanelet2_interface_ros)/launch/set_lanelet_map.launch">
+    <arg name="map_file_name" value="$(arg map_file_name)" />
+    <arg name="lat_origin" value="$(arg lat_origin)" />
+    <arg name="lon_origin" value="$(arg lon_origin)" />
+  </include>
+
+  <node pkg="rviz" type="rviz" name="my_rviz" args="-d $(find virtual_tracks)/rviz/virtual_tracks_rviz.rviz" output="screen" />
+
+  <param name="/lat_origin" value="$(arg lat_origin)"/>
+  <param name="/lon_origin" value="$(arg lon_origin)"/>
+  <node pkg="virtual_tracks" type="pub_tf.py" name="include_gps_frame_id" output="screen" />
+  <param name="/map_file_name" value="$(arg map_file_name)"/>
+  <node pkg="virtual_tracks" type="gps_markup.py" name="gps_markup" output="screen" />
+  <node pkg="rosbag" type="play" name="Imu_data_bag" args="$(find virtual_tracks)/bags/imu_data.bag" />
+</launch>
