@@ -1,0 +1,69 @@
+================================================================================
+                  R A S T E R D A T E N I N F O R M A T I O N
+================================================================================
+
+Produkt:          Digitales Orthophoto 20 (DOP20)
+
+
+Projektion:       UTM 32
+
+
+Auflösung:        -
+
+
+Pixelgröße:       0.20 m (Naturmaß)
+
+
+Bilddimension:    Breite:  2500 Pixel
+                  Höhe:    2500 Pixel
+
+
+Datenformat:      TIF
+
+
+Koordinaten:      Pixelmittelpunkte der Bildecken
+
+                                 Rechts(East) [m]| Hoch(North) [m]
+                                 ----------------+----------------
+                  links  oben    [681500.10]    |    [5406499.90]
+                  rechts oben    [681999.90]    |    [5406499.90]
+                  links  unten   [681500.10]    |    [5406000.10]
+                  rechts unten   [681999.90]    |    [5406000.10]
+
+
+                  Äußere Pixelecken der Bildecken
+
+                                 Rechts(East) [m]| Hoch(North) [m]
+                                 ----------------+----------------
+                  links  oben    [681500.00]    |    [5406500.00]
+                  rechts oben    [682000.00]    |    [5406500.00]
+                  links  unten   [681500.00]    |    [5406000.00]
+                  rechts unten   [682000.00]    |    [5406000.00]
+
+
+Fläche:           0.25 km²
+
+
+Abgabedatei:      DOP20_utm32_681500_5406000_500.tif
+
+
+Bestelldatum:     07.11.2019
+
+
+Aufnahmedatum:    08.05.2018
+
+
+================================================================================
+                Georeferenzierung mittels World File (Fa. ESRI)
+================================================================================
+
+Beschreibung des mitgelieferten World-Files: DOP20_utm32_681500_5406000_500.tfw
+
+1. Zeile:   Pixelgröße [m] Natur in x-Richtung
+2. Zeile:   Rotationsterm um y-Achse
+3. Zeile:   Rotationsterm um x-Achse
+4. Zeile:   Pixelgröße [m] Natur in y-Richtung (negativ)
+5. Zeile:   Rechtswert (East-Wert) [m] der Mitte des linken oberen
+            Pixels der Rastermatrix
+6. Zeile:   Hochwert (North-Wert) [m] der Mitte des linken oberen
+            Pixels der Rastermatrix
