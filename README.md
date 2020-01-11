@@ -48,3 +48,15 @@ roslaunch virtual_tracks display_with_transform.launch
 ```
 roslaunch virtual_tracks display_without_transform.launch
 ```
+
+To Visualize Path planning / path prediction
+
+```
+roslaunch virtual_tracks lanelet_vehicles.launch
+```
+
+To Visualize Navigation with dynamic reconfiguration of target GPS,
+
+```
+roslaunch virtual_tracks navigation.launch
+```
