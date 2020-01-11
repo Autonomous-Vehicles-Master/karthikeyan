@@ -1,0 +1,20 @@
+<launch>
+
+  <arg name="vehicle_no" />
+  <arg name="map_file_name" />
+  <arg name="lat_origin" />
+  <arg name="lon_origin" />
+
+  <param name="/lat_origin" value="$(arg lat_origin)"/>
+  <param name="/lon_origin" value="$(arg lon_origin)"/>
+  <param name="/map_file_name" value="$(arg map_file_name)"/>
+
+  <node pkg="virtual_tracks" type="pub_tf.py" name="vehicle_urdf_tf_frame_$(arg vehicle_no)" output="screen" >
+    <param name="/vehicle_no" value="$(arg vehicle_no)"/>
+  </node>
+
+  <node pkg="virtual_tracks" type="one_vehicle_path.py" name="Path_Marker_$(arg vehicle_no)" output="screen" >
+    <param name="/vehicle_no" value="$(arg vehicle_no)"/>
+  </node>
+
+</launch>

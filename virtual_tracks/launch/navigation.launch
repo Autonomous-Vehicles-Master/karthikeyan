@@ -1,0 +1,37 @@
+<launch>
+
+  <arg name="lat_origin" default="48.78462542" />
+  <arg name="lon_origin" default="11.47318943" />
+  <arg name="map_file_name" default="$(find virtual_tracks)/include/virtual_tracks/final.osm" />
+  <include file="$(find lanelet2_interface_ros)/launch/set_lanelet_map.launch">
+    <arg name="map_file_name" value="$(arg map_file_name)" />
+    <arg name="lat_origin" value="$(arg lat_origin)" />
+    <arg name="lon_origin" value="$(arg lon_origin)" />
+  </include>
+
+  <node pkg="rviz" type="rviz" name="my_rviz" args="-d $(find virtual_tracks)/rviz/virtual_tracks_rviz_navigation.rviz" output="screen" />
+
+  <param name="/lat_origin" value="$(arg lat_origin)"/>
+  <param name="/lon_origin" value="$(arg lon_origin)"/>
+  <param name="/map_file_name" value="$(arg map_file_name)"/>
+
+
+  <node pkg="rosbag" type="play" name="Imu_data_bag" args="$(find virtual_tracks)/bags/new_sc2.bag" />
+
+
+
+  <node pkg="virtual_tracks" type="pub_tf_navigation.py" name="tf_navigation" output="screen" />
+
+  <node pkg="virtual_tracks" type="navigation.py" name="navigation" output="screen" >
+  	<param name="/gps_data" value="/gps_data_1" />
+  	<param name="/navigation_marker" value="navigation_marker" />
+  </node>
+
+
+  <node pkg="virtual_tracks" type="server.py" name="track_server" /> 
+  <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" output="screen"/>
+
+  <!--node pkg="adma_listner" type="ADMA" name="ADMA_pub" output="screen" /-->
+
+  <param name="car_model" command="$(find xacro)/xacro.py $(find virtual_tracks)/urdf/car.urdf" />
+</launch>

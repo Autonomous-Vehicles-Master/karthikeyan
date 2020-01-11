@@ -1,0 +1,71 @@
+<launch>
+
+  <arg name="lat_origin" default="48.78462542" />
+  <arg name="lon_origin" default="11.47318943" />
+  <arg name="map_file_name" default="$(find virtual_tracks)/include/virtual_tracks/final.osm" />
+  <include file="$(find lanelet2_interface_ros)/launch/set_lanelet_map.launch">
+    <arg name="map_file_name" value="$(arg map_file_name)" />
+    <arg name="lat_origin" value="$(arg lat_origin)" />
+    <arg name="lon_origin" value="$(arg lon_origin)" />
+  </include>
+
+  <node pkg="rviz" type="rviz" name="my_rviz" args="-d $(find virtual_tracks)/rviz/virtual_tracks.rviz" output="screen" />
+
+  <node pkg="rosbag" type="play" name="sc1" args="$(find virtual_tracks)/bags/new_sc1.bag" />
+
+  <param name="car_model_1" command="$(find xacro)/xacro.py $(find virtual_tracks)/urdf/car_1.urdf" />
+  <param name="car_model_2" command="$(find xacro)/xacro.py $(find virtual_tracks)/urdf/car_2.urdf" />
+
+
+  <include file="$(find virtual_tracks)/launch/vehicle.launch">
+    <arg name="vehicle_no" value="1" />
+    <arg name="map_file_name" value="$(arg map_file_name)" />
+    <arg name="lat_origin" value="$(arg lat_origin)" />
+    <arg name="lon_origin" value="$(arg lon_origin)" />
+  </include>
+
+
+  <include file="$(find virtual_tracks)/launch/vehicle.launch">
+    <arg name="vehicle_no" value="2" />
+    <arg name="map_file_name" value="$(arg map_file_name)" />
+    <arg name="lat_origin" value="$(arg lat_origin)" />
+    <arg name="lon_origin" value="$(arg lon_origin)" />
+  </include>
+
+
+
+<!--
+  <node pkg="virtual_tracks" type="pub_tf_2_vehi.py" name="include_gps_frame_id" output="screen" />
+  <param name="/map_file_name" value="$(arg map_file_name)"/>
+  <node pkg="virtual_tracks" type="gps_markup_2_vehi.py" name="gps_markup" output="screen" />
+
+  <node pkg="adma_listner" type="ADMA_1" name="ADMA_pub_1" output="screen" />
+  <node pkg="adma_listner" type="ADMA_2" name="ADMA_pub_2" output="screen" />
+
+  <param name="car_model_1" command="$(find xacro)/xacro.py $(find virtual_tracks)/urdf/car_1.urdf" />
+  <param name="car_model_2" command="$(find xacro)/xacro.py $(find virtual_tracks)/urdf/car_2.urdf" />
+  
+
+
+  <node pkg="rosbag" type="play" name="Imu_data_bag_1" args="$(find virtual_tracks)/bags/imu_data.bag" />
+  <node pkg="rosbag" type="play" name="Imu_data_bag" args="$(find virtual_tracks)/bags/one_vehicle.bag" >
+    <remap from="/gps_data" to="/gps_data_2" />
+    <remap from="/imu_data" to="/imu_data_2" />
+  </node>
+
+
+
+
+  <node pkg="virtual_tracks" type="one_vehicle_path.py" name="Path_Marker_V2" output="screen" >
+  	<param name="/gps_data" value="/gps_data_2" />
+  	<param name="/path_marker" value="Path_Marker_V2" />
+  </node>
+
+  <node pkg="virtual_tracks" type="one_vehicle_path.py" name="Path_Marker_V1" output="screen" >
+	<param name="/gps_data" value="/gps_data_1" />
+  	<param name="/path_marker" value="Path_Marker_V1" />
+  </node>
+
+
+-->
+</launch>

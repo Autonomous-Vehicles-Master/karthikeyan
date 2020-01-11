@@ -1,0 +1,14 @@
+<robot name = "car">
+	<material name="blue">
+		<color rgba="0 0 0.8 1"/>
+	</material>
+	<link name = "car_frame_1">
+		<visual>
+			<origin xyz="0 0 0.5" rpy="0 0 0"/>
+			<geometry>
+				<box size="2.5 3.5 1" />
+			</geometry>
+			<material name="blue"/>
+		</visual>
+	</link>
+</robot>
